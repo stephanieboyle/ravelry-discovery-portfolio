@@ -1,69 +1,80 @@
-# Confidence to start
-### A product decision, supported by catalogue diagnostics and an experiment design
+# The next project
+### Pattern discovery, product metrics, and the messy middle
 
-**How could Ravelry help makers discover a pattern they feel confident starting, while supporting a healthy range of designers?**
+What happens between finding a pattern you like and actually starting it?
 
-Independent portfolio exercise; no affiliation with Ravelry. Built for private review. Real API data and real-data exports remain local and are excluded from Git, including this private repository. The supplied agreement restricts redistribution; private repository visibility does not override those terms.
+I used Ravelry as the setting for this project because that question has a few interesting layers. There is the maker trying to choose something they can make, the designer hoping their work gets found, and the product trying to help both of them. More browsing might be useful. It might also mean someone is stuck.
 
-## The decision
+I wanted to work through that question in the way I would in a product team: define what useful looks like, understand the journey, check the data, and work out what evidence would change the decision.
 
-Investigate a concise, explainable suitability summary within existing discovery: why a pattern fits explicit preferences, what requirements remain unknown, and how much evidence supports its crowd ratings. Validate the need with makers before building. Existing official help already describes filters, comparison and stash suggestions, so this is an improvement hypothesis rather than a claim that suitable discovery is absent.
+**The main piece is an interactive product analytics app.** The Python, SQL and dbt sit underneath it, where you can inspect how the numbers were made.
 
-The [private real-data findings](reports/private/findings.md) answer four questions: activity concentration; age/craft context; availability of rating evidence; and whether an opportunity ranking is defensible. The conclusions are conditional on a bounded `cowl` search with unspecified ordering. They favour better uncertainty communication and additional research over an objective quality score. Full observed counts and three charts are in that local report, not embedded in the repository. A fresh clone must collect its own authorised snapshot to reproduce it; records and outputs can change.
+![The product analytics app, showing simulated discovery and activation metrics](reports/app-overview.jpg)
 
-## Real evidence versus simulated evidence
+## Have a look around
 
-| Workstream | Source | What it supports |
-|---|---|---|
-| Catalogue diagnostics | Real read-only Ravelry API snapshot | Sample-specific activity, metadata and coverage observations; no impressions or causal effects |
-| Experiment demonstration | Seeded synthetic users and events in a separate directory | Statistical workflow and decision logic; no evidence that the feature works on Ravelry |
+The app has six sections:
 
-Primary experiment outcome: proportion of assigned eligible accounts recording a new in-progress project within 14 days. This is an imperfect proxy for actually starting. Keep recording affordances identical and validate behaviour through research. Designer exposure and popularity concentration need internal impression instrumentation, unavailable in this catalogue study.
+- **The overview:** discovery activity, recorded starts and return visits, with the questions I would take back to the team.
+- **Discovery funnel:** where the journey narrows, including people who start without saving a pattern first.
+- **Do people return?:** weekly retention cohorts, with the numerator and denominator behind each cell. New cohorts stay unobserved until their follow-up window is complete.
+- **The experiment:** a proposed improvement, an assumed-effect scenario, and a no-effect scenario. Both have the same decision rules.
+- **Real catalogue data:** context about recorded activity, designers and the evidence behind ratings.
+- **Behind the numbers:** metric definitions, assumptions, tracking choices and the actual SQL models.
 
-In the **synthetic effect scenario**, the estimated difference is **1.73 percentage points** (95% CI 0.81 to 2.65); it meets the predefined illustrative primary and abandonment criteria. The **synthetic null scenario** gives 0.19 points (95% CI -0.71 to 1.09) and does not meet them. Read the [generated results](reports/synthetic/summary.md), [machine-readable output](reports/synthetic/results.json) and [protocol](docs/experiment_design.md). Other proposed guardrails are not simulated, so these are not full launch criteria.
+You can filter the behavioural analysis by craft, experience and discovery cohort, inspect definitions, and download a metric slice.
 
-![Synthetic experiment intervals](reports/synthetic/effect_intervals.png)
+## First, a word about the data
 
-## Reproduce locally
+I don't have Ravelry's internal event data. I have kept three things separate:
 
-Python 3.10–3.12 recommended; validated on Python 3.10, macOS ARM64. `requirements.lock` freezes the tested environment; other platforms may need a compatible fresh resolution from pyproject.toml.
+| Data | What it is for |
+|---|---|
+| **Simulated product events** | Funnel, activation and retention analysis. Fictional accounts and behaviour, generated with a fixed seed and explicit assumptions. |
+| **A separate simulated experiment** | Assignment, intention-to-treat analysis, power, uncertainty and guardrail decisions. |
+| **Real Ravelry API data** | A bounded catalogue sample, adding context about patterns and designers. No claim to measure real impressions or product conversion. |
+
+The app labels the source in each section. Differences in simulated craft or experience segments come from the assumptions I put in; they are not discoveries about Ravelry users. Real records and their derived app payload stay local, outside the repository. A clone works fully with the simulated data; the real catalogue section needs an authorised local snapshot.
+
+## What I wanted to demonstrate
+
+A start rate is only useful if I can explain who is in it. Here, the observational denominator is discovery accounts with a complete 14-day window. A newer account is not counted as a failure. The experiment uses its own assigned-account denominator, rather than selecting people who clicked.
+
+Retention needs context too. People do not necessarily start a new craft project every week. I use a return to discovery as one signal of continued usefulness, while keeping it separate from recorded starts. Neither tells me directly how confident someone feels or whether they actually made something.
+
+The working product idea is clearer suitability information within existing discovery. Before building that, I would check the current experience and watch people choose a project. The analysis should help me ask better questions; a funnel on its own cannot explain why someone leaves.
+
+## Run the app
+
+From this directory, with Python 3.10–3.12:
 
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.lock
 python -m pip install --no-deps -e .
-make offline
+make app
 ```
 
-That reproduces both labelled synthetic scenarios, analysis, null calibration and Python checks **without API credentials**. It does not create a synthetic Ravelry catalogue.
+Open [the local app](http://127.0.0.1:8765/). The committed aggregate export makes the simulated app usable immediately; there is no API key or JavaScript build step.
 
-For the real-data pipeline, obtain app-issued **read-only Basic Auth** credentials through Ravelry's free Pro developer registration. Review the applicable agreement; see [feasibility](docs/data_feasibility.md). Configure locally:
+To rebuild the data and run the checks:
 
 ```sh
-cp .env.example .env
-chmod 600 .env
-# Edit .env privately. Never put credentials in a command or commit them.
-make collect
-make model
-make catalogue
+make app-data
+make test
 ```
 
-`make collect` makes a five-pattern probe; it refuses to overwrite an existing snapshot. After inspecting it, the documented bounded study can be run explicitly:
+That regenerates fictional accounts and events, builds the product dbt models, reruns the experiment, and exports the app data. It also creates a portable, self-contained HTML app at `reports/private/product-metrics.html`, which can be opened directly in a browser without a running server.
 
-```sh
-python -m ravelry_analytics.collect --limit 50 --query cowl --private-use --refresh
-make model catalogue
-```
+For real catalogue collection, use your own read-only app credentials in an ignored `.env`, then run the small feasibility sample before expanding. The [access guide](docs/access_setup.md) and [feasibility notes](docs/data_feasibility.md) explain the steps and constraints. Existing snapshots can be used with `make model catalogue app-export`.
 
-The client uses explicit timeouts, documented pagination, bounded transient retries and Retry-After handling. One request per second is a conservative implementation choice, **not a verified Ravelry quota**. It stores minimised catalogue fields with extraction provenance, preserves nulls versus zero, and never logs response bodies or credentials. Inspect the local retention review date; see [data handling](data/README.md).
+## If you want the detail
 
-## Review the reasoning and implementation
+- [Product metrics and app methodology](docs/product_metrics.md)
+- [Product recommendation](docs/product_recommendation.md) and [interview notes](docs/interview_notes.md)
+- [Measurement framework](docs/measurement_framework.md), [tracking plan](docs/tracking_plan.md), [experiment design](docs/experiment_design.md)
+- [Product SQL models](dbt_product/models), [catalogue SQL models](dbt/models), [Python](src/ravelry_analytics) and [tests](tests)
+- [Generated experiment results](reports/synthetic/summary.md), [validation](docs/validation.md), [project status](PROJECT_STATUS.md)
 
-- [Two-page product recommendation](docs/product_recommendation.md)
-- [Product brief](docs/product_brief.md), [measurement framework](docs/measurement_framework.md), [tracking plan](docs/tracking_plan.md)
-- [Methodology and table grains](docs/methodology.md), [interview notes](docs/interview_notes.md)
-- [Python collection and analysis](src/ravelry_analytics), [dbt SQL and tests](dbt), [Python tests](tests)
-- [Validation results](docs/validation.md), [project status](PROJECT_STATUS.md)
-
-The recommended next step is research and instrumentation, followed by an adequately powered experiment if the problem is confirmed. Public catalogue data cannot establish exposure, confidence, unmet demand, conversion or marketplace effects. User-level randomisation also needs an explicit interference assessment; shared supply and designer attention may affect both arms.
+This is an independent portfolio project, with no Ravelry affiliation and no confidential employer data. The repository is private. Data handling and publication constraints are in [the data notes](data/README.md).

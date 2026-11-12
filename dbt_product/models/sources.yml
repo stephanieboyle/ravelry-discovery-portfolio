@@ -1,0 +1,7 @@
+version: 2
+sources:
+  - name: demo
+    schema: main
+    tables:
+      - name: synthetic_users
+      - name: synthetic_events

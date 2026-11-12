@@ -1,37 +1,37 @@
 # Project status
 
-Updated: 12 November 2026. Private implementation and fresh-environment reproduction complete.
+Updated: 12 November 2026. Main deliverable: an interactive product analytics app, with local-only real catalogue context and a private source repository.
 
-## Decisions
+## Direction
 
-- User supplied authenticated documentation and the developer agreement, configured replacement read-only app credentials, and authorised personal/private analysis and a private repository.
-- General redistribution/retention constraints remain documented. No claim of provider approval for public aggregate publication. Real data and API-derived exports remain local and ignored by Git.
-- Inspected five patterns before a separate bounded 50-pattern cowl search. Unspecified default order and text matching make this a convenience sample, not a catalogue census.
-- Use embedded author IDs; authenticated designer profiles excluded. Missing count denominators constrain quality claims. No ranking score, exposure inference, conversion rate or historical series.
-- Refined feature hypothesis to explainable suitability/uncertainty in existing discovery; current UI audit and user research remain next evidence.
+The initial version overemphasised a written case study. The user clarified that the centrepiece should be a product metrics app with clearly simulated funnels and retention, and supplied their own article as a tone reference. The app and README now use first-person, product-focused explanations. No other ChatGPT conversations were accessed.
 
-## Completed
+## Completed app
 
-- Verified API reference, read-only authentication and working search/bulk-detail calls; documented endpoints/fields, terms and provenance.
-- Implemented bounded collection with timeouts, pagination, retry/Retry-After handling, minimised local storage and explicit refresh.
-- Built DuckDB source tables and six dbt models, including category bridge and identifier-only designer dimension.
-- Answered four descriptive product questions; generated three private real-data charts and traceable model/metrics exports.
-- Defined measurement, exact hypothetical events, persistence/deduplication, exposure/assignment distinction and marketplace considerations.
-- Generated separate seeded synthetic effect/null experiments; analysed ITT, maturity/completeness, SRM, planning, confidence intervals, practical significance and one guardrail; ran 500 A/A repetitions.
-- Wrote recommendation, interview notes, methodology, README and reproduction commands.
-- 22 Python tests pass. dbt: six models built, 22 tests passed, one missingness-warning test (two fields), no errors. No imputation to hide the warning.
-- All four charts visually inspected; final synthetic-chart spacing corrected.
+- Six sections: overview, discovery funnel, retention cohorts, experiment, real catalogue context, and definitions/SQL.
+- Craft, experience and cohort filters across 27 precomputed metric slices; inspectable definitions and cohort numerators/denominators; downloadable labelled CSV; effect/null scenario switch; responsive layout.
+- Separate synthetic product stream: 12,000 fictional accounts, fixed seed 20261112, explicit assumptions, ordered events and intentional transport retry copies. No real behavioural metrics claimed.
+- Three new dbt models: event grain/deduplication, discovery-account journeys and distinct active calendar weeks. Mature 14-day outcomes and complete calendar retention windows use different explicit rules.
+- The existing independently seeded experiment remains separate. The real catalogue section uses the previous bounded API sample, not simulated event joins.
+- A self-contained local HTML app is generated at reports/private/product-metrics.html. When available it includes the ignored real catalogue payload, so it stays untracked. The normal dashboard uses source files plus a safe committed synthetic aggregate JSON.
+- README rewritten around questions, interpretation, app exploration and how the SQL supports the analysis. Desktop app screenshot is included.
 
-## Final verification
+## Validation
 
-- Source-only fresh environment: dependencies installed from requirements.lock; editable installation and make offline succeeded; 22 tests passed without credentials or real data.
-- Seeded synthetic CSV SHA-256 hashes and parsed statistical results match the original run exactly.
-- Markdown links resolve; generated charts visually checked. README simulation values trace to results.json.
-- Staged-file scan compared contents with both local credential values without displaying them. No secrets, real records, local databases, private reports or editable-install absolute paths found.
-- Private GitHub repository created at https://github.com/stephanieboyle/ravelry-discovery-portfolio. Only source, documentation and labelled synthetic aggregate outputs are included; real outputs remain local.
-- The earlier apparent GitHub authentication failure was resolved after network permission; no user credential change was needed.
+- 28 Python tests pass, including known-journey metric fixtures.
+- New product dbt: three models, 17 data tests, no errors/warnings. Existing catalogue dbt: six models, 23 tests, no errors; one missingness-warning test flags two fields.
+- Fresh reproduction without credentials or real data: make app-data test succeeds; exported synthetic app JSON matches byte-for-byte; 27 slice funnels reconcile.
+- Browser interactions verified across all sections, including filters, missing maturity, retention cells, null experiment, catalogue segmentation, SQL selector and downloaded CSV. Desktop and mobile layouts inspected; no document overflow at 390 pixels.
+- Portable payloads reconcile, but direct file-protocol navigation is blocked by the in-app browser policy, so direct-file browser QA is not claimed.
 
+## Data handling
 
-## Next product evidence (outside portfolio implementation)
+User authorised personal/private analysis and the private repo. Credentials came from a replacement/new app and remain in ignored .env. Real records, databases, real app payload and derived portable HTML are local and ignored; the repository includes code, documentation, a synthetic-only screenshot and labelled synthetic aggregates. No extra API collection occurred during the app revision. The agreement constraints and future publication questions remain in docs/data_feasibility.md. Include derived app copies in retention/deletion reviews.
 
-Audit today's logged-in discovery flow; observe makers and interview designers; validate rating/count semantics and a broader permitted frame; get actual internal baselines and instrumentation; assess interference before choosing a real experiment. Public release would need a separate review of permitted outputs. Review retained real data after seven days and honour deletion requests.
+## Repository
+
+https://github.com/stephanieboyle/ravelry-discovery-portfolio — private. The revision includes the app, rewritten README, synthetic export and supporting models/tests. Secret/data scans passed; real derived payloads and credentials are excluded.
+
+## Next product evidence
+
+Review the real discovery flow, observe makers choosing projects, speak to designers, validate the recording proxy, and establish actual internal baselines. Simulated craft differences, funnels, retention and experiments do not establish Ravelry behaviour or feature effectiveness. These are proposed research/experiment steps, not missing software implementation.

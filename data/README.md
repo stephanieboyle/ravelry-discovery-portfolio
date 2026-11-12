@@ -9,3 +9,9 @@ Synthetic files live separately under data/synthetic and are regenerated from fi
 To remove local source and derived real data, close any database connections and delete `data/ravelry.duckdb` (plus a .wal if present) and `reports/private/`. Use the file manager or carefully review paths before deleting. Also remove copied exports and backups under your control. Regeneration of the synthetic experiment does not require those files.
 
 The tracked synthetic summaries/charts are explicitly labelled. No real-data aggregates are approved for public release by this project. A future public portfolio should get a separate use review and only include permitted outputs.
+
+## Product metrics app
+
+The new behavioural demonstration uses a separate `product_demo.duckdb` with fictional accounts/events, seed 20261112. `dbt_product` models its event identities, journeys and calendar-week activity. `dashboard/data.json` contains only synthetic aggregate slices, simulation metadata, SQL and the separate synthetic experiment output; it is safe to include in the private source repository.
+
+`dashboard/catalogue.private.json` contains API-derived catalogue attributes with source IDs removed/replaced by within-sample aliases. It is ignored by Git. The generated `reports/private/product-metrics.html` is a portable local app; when a real snapshot is available, it embeds that catalogue section too and must remain private and untracked. Include both files, screenshots showing real data, and any copied portable HTML in real-data removal/retention reviews. Removing the database alone does not remove these derived copies.

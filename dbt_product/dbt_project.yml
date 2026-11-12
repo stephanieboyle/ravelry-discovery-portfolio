@@ -1,0 +1,9 @@
+name: product_metrics_demo
+version: '1.0.0'
+config-version: 2
+profile: product_metrics_demo
+model-paths: [models]
+test-paths: [tests]
+models:
+  product_metrics_demo:
+    +materialized: table

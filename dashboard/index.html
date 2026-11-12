@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The next project · Stephanie Boyle</title>
+  <meta name="description" content="A product analytics portfolio exploring discovery, activation, retention and experimentation in a Ravelry-inspired experience. Product events are simulated.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to analysis</a>
+<aside class="sidebar">
+  <a href="#overview" class="identity"><span class="monogram" aria-hidden="true">sb.</span><span>Stephanie Boyle<small>Product analytics</small></span></a>
+  <div class="project-name"><span class="eyebrow">A portfolio study</span><strong>The next<br>project.</strong><p>Discovery, decisions,<br>and the bit in between.</p></div>
+  <nav aria-label="Analysis sections">
+    <a href="#overview" data-page="overview"><span aria-hidden="true">◫</span> The overview</a>
+    <a href="#funnel" data-page="funnel"><span aria-hidden="true">▽</span> Discovery funnel</a>
+    <a href="#retention" data-page="retention"><span aria-hidden="true">▦</span> Do people return?</a>
+    <a href="#experiment" data-page="experiment"><span aria-hidden="true">⇄</span> The experiment</a>
+    <a href="#catalogue" data-page="catalogue"><span aria-hidden="true">◎</span> Real catalogue data</a>
+    <a href="#methods" data-page="methods"><span aria-hidden="true">⌘</span> Behind the numbers</a>
+  </nav>
+  <div class="sidebar-bottom"><span class="small-dot"></span> Independent of Ravelry<a href="https://github.com/stephanieboyle/ravelry-discovery-portfolio" target="_blank" rel="noreferrer">Code & methodology ↗</a></div>
+</aside>
+<div class="workspace">
+  <header class="topbar"><span>Data and Other Human Things <span class="top-separator">/</span> Portfolio</span><span class="top-meta">SQL · dbt · Python · product judgement</span></header>
+  <main id="main" tabindex="-1">
+    <div id="loading" class="panel loading">Loading the analysis…</div>
+    <div id="app" hidden>
+      <div class="page-intro"><div id="source-badge" class="source-badge">SIMULATED PRODUCT EVENTS</div><span class="eyebrow" id="chapter"></span><h1 id="page-title"></h1><p id="page-description" class="page-description"></p></div>
+      <div id="filters" class="filterbar" aria-label="Analysis filters">
+        <div><label for="craft">Craft</label><select id="craft"><option>All crafts</option><option>Knitting</option><option>Crochet</option></select></div>
+        <div><label for="experience">Experience</label><select id="experience"><option>All experience</option><option>New to craft</option><option>Experienced</option></select></div>
+        <div><label for="window">First-discovery cohorts</label><select id="window"><option value="all">All 16 weeks</option><option value="8">Last 8 weeks</option><option value="4">Last 4 weeks</option></select></div>
+        <div class="filter-end"><span>6 Jul–25 Oct 2026</span><button id="download" class="text-button">Download this slice ↓</button></div>
+      </div>
+      <div id="content" aria-live="polite"></div>
+      <footer class="page-footer"><span>Stephanie Boyle · Product analytics portfolio</span><a href="#methods">Definitions, assumptions & SQL →</a></footer>
+    </div>
+  </main>
+</div>
+<script src="app.js" defer></script>
+</body>
+</html>

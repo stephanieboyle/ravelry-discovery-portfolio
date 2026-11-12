@@ -1,0 +1,39 @@
+version: 2
+models:
+  - name: fct_product_events
+    columns:
+      - name: event_id
+        data_tests: [unique, not_null]
+      - name: user_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: source('demo', 'synthetic_users')
+                field: user_id
+      - name: occurred_at
+        data_tests: [not_null]
+      - name: event_name
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [discovery_viewed, pattern_opened, pattern_saved, project_started]
+  - name: dim_discovery_users
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]
+      - name: first_discovery_at
+        data_tests: [not_null]
+      - name: craft
+        data_tests: [not_null]
+      - name: mature_14d
+        data_tests: [not_null]
+  - name: fct_discovery_weeks
+    columns:
+      - name: user_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_discovery_users')
+                field: user_id

@@ -32,3 +32,7 @@ No API field is verified yet. Catalogue attributes and snapshot totals, if acces
 ## Future decision rule
 
 Before generating simulated outcomes, lock an assumed baseline, meaningful absolute lift, power, sample size and guardrail margin. For a real experiment, agree these using actual baselines and costs. An illustrative launch criterion is a primary confidence interval excluding zero, a point estimate meeting the agreed practical threshold, no guardrail harm beyond agreed margins, and valid telemetry. A non-significant guardrail result does not establish safety; evaluate its interval against the harm margin. Inconclusive evidence means extend only under a preplanned design or revise and retest, not declare success.
+
+## Interactive product metrics demonstration
+
+The app additionally implements an **observational first-discovery funnel and calendar-week retention** on a separate fictional behavioural stream. These use first discovery as the time origin; they are not the assigned-account experiment primary outcome above. Exact definitions, maturity logic, optional saves, cohort weighting and model grains are in [product_metrics.md](product_metrics.md). The app labels its sources and keeps the experiment population and real catalogue independent of the behavioural filters.

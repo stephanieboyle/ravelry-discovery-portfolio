@@ -1,0 +1,9 @@
+product_metrics_demo:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: ../data/product_demo.duckdb
+      threads: 1
+      settings:
+        enable_external_access: false

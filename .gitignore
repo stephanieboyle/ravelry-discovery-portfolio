@@ -24,3 +24,7 @@ dbt/logs/
 # API-derived exports and local plotting cache
 reports/private/
 .cache/
+# Local-only real catalogue payload; never deploy or commit.
+dashboard/catalogue.private.json
+dbt_product/target/
+dbt_product/logs/
