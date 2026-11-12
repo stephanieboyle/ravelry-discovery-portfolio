@@ -6,6 +6,10 @@ Updated: 12 November 2026. Main deliverable: an interactive product analytics ap
 
 The initial version overemphasised a written case study. The user clarified that the centrepiece should be a product metrics app with clearly simulated funnels and retention, and supplied their own article as a tone reference. The app and README now use first-person, product-focused explanations. No other ChatGPT conversations were accessed.
 
+## Product-report presentation refinement
+
+User clarified that the app should read as an analyst reporting Ravelry product metrics, with a stronger knitting identity. It now uses a warm wool/forest/rust palette, yarn-and-needle illustration and stitch detail. Navigation and page titles use plain reporting labels. The overview centres on three measures: weekly active discovery accounts, 14-day recorded-start rate and week-four discovery retention. Cohort counts and median time to start are supporting detail. A short data-derived summary and proposed investigation replace the portfolio narration. Personal reasoning stays in the README. Simulation labels and metric definitions remain explicit.
+
 ## Completed app
 
 - Six sections: overview, discovery funnel, retention cohorts, experiment, real catalogue context, and definitions/SQL.

@@ -2,6 +2,7 @@
 import argparse
 import json
 from pathlib import Path
+from urllib.parse import quote
 
 import duckdb
 import pandas as pd
@@ -119,7 +120,10 @@ def main():
     boot = 'window.PRODUCT_DEMO_DATA=' + json.dumps(payload, allow_nan=False).replace('<', '\\u003c') + ';'
     boot += 'window.PRODUCT_CATALOGUE_DATA=' + json.dumps(real_payload, allow_nan=False).replace('<', '\\u003c') + ';'
     html = (out / 'index.html').read_text()
-    html = html.replace('<link rel="stylesheet" href="styles.css">', '<style>' + (out / 'styles.css').read_text() + '</style>')
+    css = (out / 'styles.css').read_text()
+    if (out / 'stitches.svg').exists():
+        css = css.replace("url('stitches.svg')", 'url("data:image/svg+xml,' + quote((out / 'stitches.svg').read_text(), safe='') + '")')
+    html = html.replace('<link rel="stylesheet" href="styles.css">', '<style>' + css + '</style>')
     html = html.replace('<script src="app.js" defer></script>', '<script>' + boot + '</script><script>' + (out / 'app.js').read_text() + '</script>')
     standalone.write_text(html)
     print(f'Exported 27 SYNTHETIC metric slices. Private catalogue payload: {"available locally, ignored by Git" if has_real else "not available"}.')

@@ -48,3 +48,7 @@ The experiment page uses the existing independent effect and null simulations, k
 The app has accessible navigation, native select filters, metric definitions, inspectable retention cells, downloadable aggregate CSV, experiment scenario selection, and actual model SQL. It uses local assets with no analytics trackers, external fonts or Ravelry credentials in the browser. Narrow layouts stack panels and keep the cohort table horizontally scrollable. Real catalogue payloads and portable HTML containing those payloads are ignored by Git.
 
 `make app` previews the committed synthetic export. `make app-data` rebuilds the entire synthetic app pipeline and a portable local HTML deliverable. Its embedded datasets allow that HTML to work offline. A local real snapshot adds a separately labelled real section; it is not needed for a clone to demonstrate product metrics.
+
+## Product-report presentation
+
+The overview reports three primary measures: latest complete-week discovery activity, mature 14-day recorded-start rate, and observable week-four discovery retention. Latest-week activity compares the same selected cohort population with the preceding complete week; it is not Ravelry-wide active users. New versus returning accounts and median time among starters are supporting measures. The analysis summary reports the open-to-start progression and proposes follow-up research without a causal claim. App language uses product-report labels; personal narrative is kept in the README. The knitting visual identity uses local vector assets rather than Ravelry branding.

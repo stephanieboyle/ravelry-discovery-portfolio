@@ -1,5 +1,5 @@
-# The next project
-### Pattern discovery, product metrics, and the messy middle
+# Cast on
+### Ravelry discovery, activation and retention
 
 What happens between finding a pattern you like and actually starting it?
 
@@ -15,12 +15,12 @@ I wanted to work through that question in the way I would in a product team: def
 
 The app has six sections:
 
-- **The overview:** discovery activity, recorded starts and return visits, with the questions I would take back to the team.
+- **Overview:** three headline measures — weekly discovery activity, 14-day recorded-start rate and week-four retention — with a concise analysis summary.
 - **Discovery funnel:** where the journey narrows, including people who start without saving a pattern first.
-- **Do people return?:** weekly retention cohorts, with the numerator and denominator behind each cell. New cohorts stay unobserved until their follow-up window is complete.
-- **The experiment:** a proposed improvement, an assumed-effect scenario, and a no-effect scenario. Both have the same decision rules.
-- **Real catalogue data:** context about recorded activity, designers and the evidence behind ratings.
-- **Behind the numbers:** metric definitions, assumptions, tracking choices and the actual SQL models.
+- **Retention:** weekly retention cohorts, with the numerator and denominator behind each cell. New cohorts stay unobserved until their follow-up window is complete.
+- **Experiment:** a proposed improvement, an assumed-effect scenario, and a no-effect scenario. Both have the same decision rules.
+- **Pattern catalogue:** context about recorded activity, designers and the evidence behind ratings.
+- **Metric definitions:** metric definitions, assumptions, tracking choices and the actual SQL models.
 
 You can filter the behavioural analysis by craft, experience and discovery cohort, inspect definitions, and download a metric slice.
 
