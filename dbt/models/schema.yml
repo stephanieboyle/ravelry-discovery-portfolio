@@ -1,0 +1,46 @@
+version: 2
+models:
+  - name: stg_patterns
+    description: Latest complete snapshot, one row per pattern; raw averages retained.
+    columns:
+      - name: pattern_id
+        data_tests: [unique, not_null]
+      - name: snapshot_id
+        data_tests: [not_null]
+      - name: extracted_at
+        data_tests: [not_null]
+      - name: craft
+        data_tests: [not_null]
+  - name: stg_designers
+    columns:
+      - name: designer_id
+        data_tests: [unique, not_null]
+  - name: dim_designers
+    columns:
+      - name: designer_id
+        data_tests: [unique, not_null]
+  - name: dim_patterns
+    columns:
+      - name: pattern_id
+        data_tests: [unique, not_null]
+      - name: designer_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_designers')
+                field: designer_id
+  - name: pattern_discovery
+    columns:
+      - name: pattern_id
+        data_tests: [unique, not_null]
+  - name: bridge_pattern_categories
+    columns:
+      - name: category_id
+        data_tests: [not_null]
+      - name: pattern_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_patterns')
+                field: pattern_id

@@ -1,0 +1,26 @@
+# Secrets, including nested variants
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+# API records and derived local stores stay private pending terms review
+data/*
+!data/README.md
+*.duckdb*
+*.db
+cache/
+logs/
+dbt/target/
+dbt/logs/
+.DS_Store
+
+# API-derived exports and local plotting cache
+reports/private/
+.cache/

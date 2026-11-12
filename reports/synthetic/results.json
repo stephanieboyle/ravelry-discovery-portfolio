@@ -1,0 +1,134 @@
+{
+  "assumed_effect": {
+    "synthetic": true,
+    "candidates": 24000,
+    "ineligible": 2343,
+    "assigned": 21657,
+    "mature": 21657,
+    "immature": 0,
+    "srm_p": 0.8972718863163824,
+    "primary": {
+      "treatment_n": 10819,
+      "control_n": 10838,
+      "treatment_successes": 1590,
+      "control_successes": 1405,
+      "treatment_rate": 0.14696367501617524,
+      "control_rate": 0.12963646429230485,
+      "difference": 0.01732721072387039,
+      "ci_low": 0.008133257973578938,
+      "ci_high": 0.026522495034330407,
+      "relative_lift": 0.13366000699310132,
+      "relative_lift_ci": [
+        0.060546688233357626,
+        0.21171319243841502
+      ],
+      "p_value": 0.00022133412872854327
+    },
+    "abandonment_guardrail": {
+      "treatment_n": 10819,
+      "control_n": 10838,
+      "treatment_successes": 2940,
+      "control_successes": 2979,
+      "treatment_rate": 0.27174415380349387,
+      "control_rate": 0.2748662114781325,
+      "difference": -0.003122057674638634,
+      "ci_low": -0.01499099535270163,
+      "ci_high": 0.008748339872194935,
+      "relative_lift": -0.011358462933109603,
+      "relative_lift_ci": [
+        -0.053374675252649384,
+        0.032527079638978496
+      ],
+      "p_value": 0.6062197619120893
+    },
+    "baseline_balance_exploratory": {
+      "experienced": {
+        "treatment_fraction": 0.44384878454570664,
+        "control_fraction": 0.44519284000738146,
+        "standardised_difference": -0.0027048129962350047
+      },
+      "craft": {
+        "treatment_fraction": 0.7116184490248637,
+        "control_fraction": 0.7040044288614136,
+        "standardised_difference": 0.01674262805333999
+      }
+    },
+    "decision": "meets illustrative criteria",
+    "interpretation": "Simulation only; no evidence of Ravelry feature effectiveness."
+  },
+  "null": {
+    "synthetic": true,
+    "candidates": 24000,
+    "ineligible": 2343,
+    "assigned": 21657,
+    "mature": 21657,
+    "immature": 0,
+    "srm_p": 0.8972718863163824,
+    "primary": {
+      "treatment_n": 10819,
+      "control_n": 10838,
+      "treatment_successes": 1423,
+      "control_successes": 1405,
+      "treatment_rate": 0.1315278676402625,
+      "control_rate": 0.12963646429230485,
+      "difference": 0.0018914033479576486,
+      "ci_low": -0.007085496953290702,
+      "ci_high": 0.010868981806577279,
+      "relative_lift": 0.01459005657307122,
+      "relative_lift_ci": [
+        -0.05279413968655422,
+        0.08675800566871472
+      ],
+      "p_value": 0.6795731316739094
+    },
+    "abandonment_guardrail": {
+      "treatment_n": 10819,
+      "control_n": 10838,
+      "treatment_successes": 2975,
+      "control_successes": 2979,
+      "treatment_rate": 0.2749792032535354,
+      "control_rate": 0.2748662114781325,
+      "difference": 0.00011299177540291527,
+      "ci_low": -0.011778437299976026,
+      "ci_high": 0.012004675566475668,
+      "relative_lift": 0.00041107917482929857,
+      "relative_lift_ci": [
+        -0.04193741801602946,
+        0.04463177628049575
+      ],
+      "p_value": 0.9851429239500211
+    },
+    "baseline_balance_exploratory": {
+      "experienced": {
+        "treatment_fraction": 0.44384878454570664,
+        "control_fraction": 0.44519284000738146,
+        "standardised_difference": -0.0027048129962350047
+      },
+      "craft": {
+        "treatment_fraction": 0.7116184490248637,
+        "control_fraction": 0.7040044288614136,
+        "standardised_difference": 0.01674262805333999
+      }
+    },
+    "decision": "does not meet illustrative criteria",
+    "interpretation": "Simulation only; no evidence of Ravelry feature effectiveness."
+  },
+  "planning": {
+    "assumed_baseline": 0.12,
+    "assumed_absolute_effect": 0.015,
+    "alpha": 0.05,
+    "power": 0.8,
+    "required_per_arm": 7756,
+    "required_total": 15512,
+    "mde_at_10800_per_arm": 0.012662188746139728,
+    "method": "Two-sided normal approximation, Cohen h; no attrition/inference across repeated looks"
+  },
+  "null_calibration": {
+    "repetitions": 500,
+    "seed": 20261027,
+    "true_effect": 0,
+    "false_positive_fraction": 0.044,
+    "ci_coverage": 0.956,
+    "mc_standard_error_at_nominal": 0.009746794344808964
+  }
+}

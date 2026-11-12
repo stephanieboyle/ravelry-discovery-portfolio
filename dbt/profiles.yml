@@ -1,0 +1,9 @@
+ravelry_discovery:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('RAVELRY_DB_PATH', '../data/ravelry.duckdb') }}"
+      threads: 1
+      settings:
+        enable_external_access: false

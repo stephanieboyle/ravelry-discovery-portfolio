@@ -1,0 +1,9 @@
+name: ravelry_discovery
+version: '1.0.0'
+config-version: 2
+profile: ravelry_discovery
+model-paths: [models]
+test-paths: [tests]
+models:
+  ravelry_discovery:
+    +materialized: table

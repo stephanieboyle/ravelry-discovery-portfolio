@@ -1,0 +1,7 @@
+version: 2
+sources:
+  - name: api
+    schema: main
+    tables:
+      - name: raw_patterns
+      - name: collection_runs
