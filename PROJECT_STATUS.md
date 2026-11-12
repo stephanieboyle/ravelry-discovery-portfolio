@@ -39,3 +39,7 @@ https://github.com/stephanieboyle/ravelry-discovery-portfolio — private. The r
 ## Next product evidence
 
 Review the real discovery flow, observe makers choosing projects, speak to designers, validate the recording proxy, and establish actual internal baselines. Simulated craft differences, funnels, retention and experiments do not establish Ravelry behaviour or feature effectiveness. These are proposed research/experiment steps, not missing software implementation.
+
+## Visualisation and naming update
+
+User selected **Count Your Stitches** as the project name. Added a proportional-width funnel chart, weekly new/returning stacked columns, activation-by-craft bars, a saved-versus-direct start-path bar, and week-1/4/8 retention checkpoint bars. Preserved the overview analysis summary. Supporting measures and methodology explanations are collapsed; removed redundant narrative cards and the craft table. No pie charts. All visualisations use the existing aggregates and respond to the existing filters; no new behavioural or causal claims.

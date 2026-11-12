@@ -52,3 +52,7 @@ The app has accessible navigation, native select filters, metric definitions, in
 ## Product-report presentation
 
 The overview reports three primary measures: latest complete-week discovery activity, mature 14-day recorded-start rate, and observable week-four discovery retention. Latest-week activity compares the same selected cohort population with the preceding complete week; it is not Ravelry-wide active users. New versus returning accounts and median time among starters are supporting measures. The analysis summary reports the open-to-start progression and proposes follow-up research without a causal claim. App language uses product-report labels; personal narrative is kept in the README. The knitting visual identity uses local vector assets rather than Ravelry branding.
+
+## Visualisations
+
+Count Your Stitches uses funnel stage-boundary widths proportional to distinct mature-account counts, with labelled counts and shares of entrants; polygon area is not an additional metric. New/returning columns reconcile to weekly active discovery accounts. Craft bars divide recorded starts by the same mature-account denominators. The start-path bar divides recorded starters into save-before-start and no-prior-save groups. Retention checkpoint bars use complete-window numerators/denominators separately for weeks 1, 4 and 8. Missing horizons remain unobserved. No pie charts are used. The original overview analysis summary remains visible; supporting metric detail is collapsed.

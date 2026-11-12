@@ -1,4 +1,4 @@
-# Cast on
+# Count Your Stitches
 ### Ravelry discovery, activation and retention
 
 What happens between finding a pattern you like and actually starting it?
