@@ -43,3 +43,9 @@ Review the real discovery flow, observe makers choosing projects, speak to desig
 ## Visualisation and naming update
 
 User selected **Count Your Stitches** as the project name. Added a proportional-width funnel chart, weekly new/returning stacked columns, activation-by-craft bars, a saved-versus-direct start-path bar, and week-1/4/8 retention checkpoint bars. Preserved the overview analysis summary. Supporting measures and methodology explanations are collapsed; removed redundant narrative cards and the craft table. No pie charts. All visualisations use the existing aggregates and respond to the existing filters; no new behavioural or causal claims.
+
+## Overview opening
+
+Replaced the generic page title/subtitle with “Finding a pattern is just the start.” and a concise headline summary showing pattern-open and recorded-start shares. The summary recalculates from the selected mature-account cohort and explicitly describes simulated behaviour. The detailed analysis summary remains unchanged.
+
+Removed the sb monogram at the user's request; the top-left identity now displays Stephanie Boyle and Product analytics at all screen sizes. Headline statistics explicitly use accounts with complete follow-up.

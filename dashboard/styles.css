@@ -1360,3 +1360,7 @@ h1 { font-size: 37px; letter-spacing: -.7px; }
 .project-name strong { font-size: 33px; line-height: 1.13; }
 @media(max-width:900px) { .project-name strong { font-size: 27px; } }
 @media(max-width:620px) { .sidebar .identity::after { font-size: 20px; max-width: 145px; line-height: 1.1; text-align: right; } }
+
+.identity { min-height: 43px; }
+.identity small { display: block; }
+@media(max-width:620px) { .identity { min-height: 35px; } .identity small { font-size: 10px; } }

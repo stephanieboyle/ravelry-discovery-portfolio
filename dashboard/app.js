@@ -15,7 +15,7 @@ const defs = {
   time: 'Median elapsed days from first discovery to first recorded start, among mature accounts that recorded one within 14 days. It excludes non-starters and is not time-to-start for all users.',
 };
 const pages = {
-  overview: ['Product metrics review', 'Pattern discovery', 'Discovery activity, recorded project starts and retention across the pattern-finding journey.'],
+  overview: ['The discovery-to-start gap', 'Finding a pattern is just the start.', 'Explore where browsing becomes a recorded project start.'],
   funnel: ['Activation', 'Discovery funnel', 'Progression from a first discovery visit to a recorded project start, within 14 days.'],
   retention: ['Retention', 'Discovery retention', 'Weekly return rates by first-discovery cohort, using complete observation windows.'],
   experiment: ['Experiment review', 'Pattern suitability experiment', 'Proposed test: does clearer information about difficulty and materials increase recorded project starts?'],
@@ -215,6 +215,10 @@ function render() {
   page = Object.hasOwn(pages, location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
   const [chapter, title, description] = pages[page];
   $('#chapter').textContent = chapter; $('#page-title').textContent = title; $('#page-description').textContent = description;
+  if (page === 'overview') {
+    const s = slice().summary;
+    $('#page-description').textContent = s.mature ? `In this simulated journey, ${percent(s.opened / s.mature)} of accounts with full follow-up open a pattern, but ${percent(s.activation_rate)} record a project start within 14 days. The biggest drop-off comes after opening a pattern.` : 'These cohorts are still completing their 14-day follow-up. Start rates will remain unobserved until that window closes.';
+  }
   document.title = `${title} · Count Your Stitches`;
   const badge = $('#source-badge');
   badge.className = `source-badge${page === 'catalogue' ? ' real' : page === 'methods' ? ' mixed' : ''}`;
