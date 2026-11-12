@@ -1284,8 +1284,8 @@ nav a.active>span { color: #4d7059; }
   left: 0;
   right: 0;
   height: 12px;
-  opacity: .6;
-  background: url('stitches.svg') repeat-x left bottom / 38px 24px;
+  opacity: .8;
+  background: url('needle.svg') no-repeat center / 100% 14px;
 }
 h1 { font-size: 37px; letter-spacing: -.7px; }
 .primary-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -1364,3 +1364,19 @@ h1 { font-size: 37px; letter-spacing: -.7px; }
 .identity { min-height: 43px; }
 .identity small { display: block; }
 @media(max-width:620px) { .identity { min-height: 35px; } .identity small { font-size: 10px; } }
+
+/* Secondary analysis and decision tools stay off the headline metric row. */
+.comparison-list { margin: 15px 0; font-size: 11px; }
+.comparison-list>div { display:flex; justify-content:space-between; align-items:baseline; gap:15px; padding:10px 0; border-bottom:1px solid var(--line); }
+.comparison-list dt { color:var(--muted); }
+.comparison-list dd { margin:0; text-align:right; font-size:13px; font-weight:600; }
+.attention-control, .decision-controls { display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; margin:12px 0 20px; }
+.attention-control label, .decision-controls label { font-size:10px; color:var(--muted); }
+.attention-control select, .decision-controls select { border:1px solid var(--line); padding:7px 25px 7px 9px; background:var(--paper); border-radius:4px; max-width:240px; font-size:11px; }
+.decision-controls label { display:block; margin-bottom:5px; }
+.guardrail-status { padding:10px 13px; border-radius:4px; background:var(--paper); font-size:12px; font-weight:600; }
+.attention-grid { margin-bottom:0; }
+.secondary-action { display:inline-block; margin-left:20px; }
+.criteria-list strong { text-align:right; font-size:10px; font-weight:500; max-width:60%; }
+@media(max-height:800px) and (min-width:621px) { .yarn-mark { height:60px; margin-bottom:10px; } .project-name { margin-top:15px; margin-bottom:15px; } .sidebar-bottom { padding-top:15px; } nav { gap:3px; } }
+@media(max-width:620px) { .secondary-action { margin:10px 0 0; display:block; } .attention-control { gap:8px; } .comparison-list dd { font-size:12px; } }
