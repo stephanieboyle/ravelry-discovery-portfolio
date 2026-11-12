@@ -37,3 +37,17 @@ models:
               arguments:
                 to: ref('dim_discovery_users')
                 field: user_id
+  - name: mart_activation_retention
+    columns:
+      - name: user_id
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_discovery_users')
+                field: user_id
+      - name: activated_14d
+        data_tests: [not_null]
+      - name: eligible_week4
+        data_tests: [not_null]

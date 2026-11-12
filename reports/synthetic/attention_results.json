@@ -1,0 +1,82 @@
+{
+  "synthetic": true,
+  "seed": 20261113,
+  "assumptions": {
+    "no_exposure_probability": 0.1,
+    "control_top_share": 0.5,
+    "treatment_top_shares": {
+      "neutral": 0.5,
+      "concentration_stress": 0.58
+    },
+    "harm_margin": 0.03,
+    "note": "New sensitivity analysis; original primary/abandonment criteria are unchanged."
+  },
+  "scenarios": {
+    "neutral": {
+      "synthetic": true,
+      "arms": {
+        "control": {
+          "accounts": 10838,
+          "without_impressions": 1098,
+          "impressions": 88374,
+          "top_impressions": 44233,
+          "top_share": 0.5005205150836218,
+          "designer_coverage": 100,
+          "hhi": 0.027835534895116844
+        },
+        "treatment": {
+          "accounts": 10819,
+          "without_impressions": 1056,
+          "impressions": 88000,
+          "top_impressions": 44121,
+          "top_share": 0.501375,
+          "designer_coverage": 100,
+          "hhi": 0.027912170196280988
+        }
+      },
+      "difference": 0.0008544849163781842,
+      "ci_low": -0.0035278100914199304,
+      "ci_high": 0.005482279924129052,
+      "harm_margin": 0.03,
+      "status": "within margin",
+      "bootstrap_repetitions": 500,
+      "bootstrap_seed": 20261114,
+      "top_designers": 10,
+      "designer_universe": 100,
+      "method": "Impression-weighted ratio; percentile interval resamples assigned account clusters, including zero-exposure accounts."
+    },
+    "concentration_stress": {
+      "synthetic": true,
+      "arms": {
+        "control": {
+          "accounts": 10838,
+          "without_impressions": 1098,
+          "impressions": 88374,
+          "top_impressions": 44233,
+          "top_share": 0.5005205150836218,
+          "designer_coverage": 100,
+          "hhi": 0.027835534895116844
+        },
+        "treatment": {
+          "accounts": 10819,
+          "without_impressions": 1056,
+          "impressions": 88000,
+          "top_impressions": 51162,
+          "top_share": 0.5813863636363636,
+          "designer_coverage": 100,
+          "hhi": 0.03576043724173553
+        }
+      },
+      "difference": 0.08086584855274181,
+      "ci_low": 0.07639121969063821,
+      "ci_high": 0.08532104955369284,
+      "harm_margin": 0.03,
+      "status": "material harm",
+      "bootstrap_repetitions": 500,
+      "bootstrap_seed": 20261114,
+      "top_designers": 10,
+      "designer_universe": 100,
+      "method": "Impression-weighted ratio; percentile interval resamples assigned account clusters, including zero-exposure accounts."
+    }
+  }
+}

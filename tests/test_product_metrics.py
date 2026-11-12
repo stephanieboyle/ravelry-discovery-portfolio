@@ -42,7 +42,7 @@ def modelled():
     con.register('input_users', users); con.register('input_events', events)
     con.execute('create table synthetic_users as select * from input_users')
     con.execute('create table synthetic_events as select * from input_events')
-    for name in ['fct_product_events', 'dim_discovery_users', 'fct_discovery_weeks']:
+    for name in ['fct_product_events', 'dim_discovery_users', 'fct_discovery_weeks', 'mart_activation_retention']:
         sql = (ROOT / 'dbt_product/models' / f'{name}.sql').read_text()
         sql = re.sub(r"\{\{ source\('demo', '([^']+)'\) \}\}", r'\1', sql)
         sql = re.sub(r"\{\{ ref\('([^']+)'\) \}\}", r'\1', sql)
@@ -97,3 +97,18 @@ def test_product_generator_seed_and_event_identity():
     assert e1.event_id.duplicated().any()
     assert set(e1.user_id) <= set(u1.user_id)
     assert e1.occurred_at.max() < pd.Timestamp('2026-10-26', tz='UTC')
+
+
+def test_activation_precedes_retention_and_unknowns_stay_unknown(modelled):
+    result=make_slice(modelled)['activation_retention']
+    assert result['groups'][0]['numerator']==1
+    assert result['groups'][0]['denominator']==1
+    assert result['groups'][1]['numerator']==0
+    assert result['groups'][1]['denominator']==2
+    assert result['eligible_accounts']==3
+    assert result['crude_gap']==pytest.approx(1)
+    assert result['coverage']==pytest.approx(2/3)
+    assert result['standardised_gap']==pytest.approx(1)
+    recent=make_slice(modelled,window='4')['activation_retention']
+    assert recent['eligible_accounts']==0 and recent['crude_gap'] is None
+    assert recent['standardised_gap'] is None

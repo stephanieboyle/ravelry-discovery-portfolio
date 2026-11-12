@@ -25,6 +25,12 @@ product-model:
 	cd dbt_product && ../.venv/bin/dbt build --profiles-dir . --no-use-colors --no-send-anonymous-usage-stats
 app-export:
 	$(PYTHON) -m ravelry_analytics.export_dashboard
-app-data: product-data product-model simulate experiment app-export
+app-data: product-data product-model simulate experiment attention app-export
 app:
 	$(PYTHON) -m http.server 8765 --bind 127.0.0.1 --directory dashboard
+
+.PHONY: attention
+attention:
+	$(PYTHON) -m ravelry_analytics.designer_attention
+
+.NOTPARALLEL: app-data
