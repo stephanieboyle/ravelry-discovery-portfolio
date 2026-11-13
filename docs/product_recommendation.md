@@ -22,7 +22,7 @@ If research supports the intervention, instrument assignment, visible impression
 
 The primary outcome is the share of assigned eligible accounts recording a new project within 14 days. It is a proxy: makers can start without recording, or change recording behaviour after seeing a new feature. Keep recording opportunities equivalent between arms and gather voluntary follow-up evidence of actual making. Count each assigned account once and wait for complete follow-up plus ingestion time.
 
-Predefine the smallest worthwhile lift, duration/sample size and decision rule using actual baseline data. The separate [simulation](experiment_design.md) illustrates planning and inference under explicit assumptions; its results do not predict Ravelry's effect. The implemented rule requires a positive primary interval, a practically meaningful estimate, valid telemetry and an abandonment interval excluding material harm. Designer exposure, popularity concentration and experience quality are additional proposed launch guardrails; they are not fabricated in the synthetic dataset and must be measured in a real test.
+Predefine the smallest worthwhile lift, duration/sample size and decision rule using actual baseline data. The separate [simulation](experiment_design.md) illustrates planning and inference under explicit assumptions; its results do not predict Ravelry's effect. The implemented rule requires a positive primary interval, a practically meaningful estimate, valid telemetry and an abandonment interval excluding material harm. Designer attention now has a separate, clearly labelled synthetic sensitivity analysis, including a concentration stress test. It does not predict real exposure effects. Popularity concentration, maker experience and all real exposure outcomes still require instrumentation and measurement.
 
 ## Marketplace trade-offs and decision
 
@@ -31,3 +31,7 @@ More starts alone could hide a less healthy ecosystem if attention narrows towar
 For a limited interface trial, user-level assignment may be practical because many makers can use the same pattern. Still, reviews, recommendation feedback and designer attention are shared. Consider clusters or switchbacks only if a credible interference mechanism outweighs their lower power, overlap and carry-over costs. A mixed-allocation result may differ from full rollout.
 
 The current recommendation is to validate the uncertainty problem and its explanation, then run a bounded test if supported. Do not launch a quality score from this catalogue sample. Next evidence: current-journey research, verified count/scale semantics, a broader permitted sampling frame, reliable internal baseline/latency data and an interference assessment. Public release of any API-derived results needs its own terms review; this private build is not evidence of publication permission.
+
+## Interactive decision view
+
+The app now surfaces the recommendation and a new-to-craft planning cohort, with coverage × assumed absolute-lift scenarios. These are sensitivity assumptions rather than a forecast or a segment-specific treatment estimate. The extended experimental review can hold an otherwise positive start result when the attention guardrail fails. See [product_decision.md](product_decision.md).

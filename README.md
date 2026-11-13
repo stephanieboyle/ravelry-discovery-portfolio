@@ -13,16 +13,17 @@ I wanted to work through that question in the way I would in a product team: def
 
 ## Have a look around
 
-The app has six sections:
+The app has seven sections:
 
 - **Overview:** three headline measures — weekly discovery activity, 14-day recorded-start rate and week-four retention — with a concise analysis summary.
 - **Discovery funnel:** where the journey narrows, including people who start without saving a pattern first.
-- **Retention:** weekly retention cohorts, with the numerator and denominator behind each cell. New cohorts stay unobserved until their follow-up window is complete.
-- **Experiment:** a proposed improvement, an assumed-effect scenario, and a no-effect scenario. Both have the same decision rules.
+- **Retention:** weekly cohorts and a day-14 activation comparison, including a craft/experience composition check. Incomplete windows stay unobserved.
+- **Experiment:** effect/null outcomes plus a separate designer-attention sensitivity. An increase in starts can still fail the concentration guardrail.
+- **Product decision:** a proposed target group, opportunity-sizing assumptions, and explicit test/rollout criteria.
 - **Pattern catalogue:** context about recorded activity, designers and the evidence behind ratings.
 - **Metric definitions:** metric definitions, assumptions, tracking choices and the actual SQL models.
 
-You can filter the behavioural analysis by craft, experience and discovery cohort, inspect definitions, and download a metric slice.
+You can filter the analysis, inspect definitions, download a metric slice, and vary the impact assumptions. The three headline metrics stay the same.
 
 ## First, a word about the data
 
@@ -72,9 +73,10 @@ For real catalogue collection, use your own read-only app credentials in an igno
 ## If you want the detail
 
 - [Product metrics and app methodology](docs/product_metrics.md)
+- [Activation and later retention](docs/activation_retention.md), [designer attention protocol](docs/designer_attention.md), [product decision and sizing](docs/product_decision.md)
 - [Product recommendation](docs/product_recommendation.md) and [interview notes](docs/interview_notes.md)
 - [Measurement framework](docs/measurement_framework.md), [tracking plan](docs/tracking_plan.md), [experiment design](docs/experiment_design.md)
 - [Product SQL models](dbt_product/models), [catalogue SQL models](dbt/models), [Python](src/ravelry_analytics) and [tests](tests)
 - [Generated experiment results](reports/synthetic/summary.md), [validation](docs/validation.md), [project status](PROJECT_STATUS.md)
 
-This is an independent portfolio project, with no Ravelry affiliation and no confidential employer data. The repository is private. Data handling and publication constraints are in [the data notes](data/README.md).
+This is an independent portfolio project, with no Ravelry affiliation and no confidential employer data. The public repository contains source code and synthetic aggregates only. Data handling and publication constraints are in [the data notes](data/README.md).

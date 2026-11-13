@@ -1,51 +1,35 @@
 # Project status
 
-Updated: 12 November 2026. Main deliverable: an interactive product analytics app, with local-only real catalogue context and a private source repository.
+Updated: 12 November 2026. **Count Your Stitches** is a local product metrics app, backed by a source repository and reproducible Python/SQL/dbt analysis.
 
-## Direction
+## Product and presentation decisions
 
-The initial version overemphasised a written case study. The user clarified that the centrepiece should be a product metrics app with clearly simulated funnels and retention, and supplied their own article as a tone reference. The app and README now use first-person, product-focused explanations. No other ChatGPT conversations were accessed.
+- Main question: help makers choose patterns they feel confident starting while supporting designers.
+- User selected simulated product funnels/retention as the main experience, with real Ravelry catalogue context separate. No other ChatGPT conversations were accessed; the user's writing sample informed the README.
+- Report-style app copy, three overview metrics (discovery activity, recorded starts, week-four retention), visual charts, no pies, and a preserved analysis summary.
+- Knitting identity, a knitting-needle divider, and “Stephanie Boyle · Product analytics” without the sb monogram.
 
-## Product-report presentation refinement
+## Completed analysis
 
-User clarified that the app should read as an analyst reporting Ravelry product metrics, with a stronger knitting identity. It now uses a warm wool/forest/rust palette, yarn-and-needle illustration and stitch detail. Navigation and page titles use plain reporting labels. The overview centres on three measures: weekly active discovery accounts, 14-day recorded-start rate and week-four discovery retention. Cohort counts and median time to start are supporting detail. A short data-derived summary and proposed investigation replace the portfolio narration. Personal reasoning stays in the README. Simulation labels and metric definitions remain explicit.
-
-## Completed app
-
-- Six sections: overview, discovery funnel, retention cohorts, experiment, real catalogue context, and definitions/SQL.
-- Craft, experience and cohort filters across 27 precomputed metric slices; inspectable definitions and cohort numerators/denominators; downloadable labelled CSV; effect/null scenario switch; responsive layout.
-- Separate synthetic product stream: 12,000 fictional accounts, fixed seed 20261112, explicit assumptions, ordered events and intentional transport retry copies. No real behavioural metrics claimed.
-- Three new dbt models: event grain/deduplication, discovery-account journeys and distinct active calendar weeks. Mature 14-day outcomes and complete calendar retention windows use different explicit rules.
-- The existing independently seeded experiment remains separate. The real catalogue section uses the previous bounded API sample, not simulated event joins.
-- A self-contained local HTML app is generated at reports/private/product-metrics.html. When available it includes the ignored real catalogue payload, so it stays untracked. The normal dashboard uses source files plus a safe committed synthetic aggregate JSON.
-- README rewritten around questions, interpretation, app exploration and how the SQL supports the analysis. Desktop app screenshot is included.
+- Bounded real API feasibility probe then separate 50-pattern cowl sample. Read-only app access verified. Six catalogue dbt models; no impressions, conversion or causal claims inferred from public totals.
+- Fictional product stream: 12,000 accounts, fixed seed and explicit assumptions. Four product dbt models cover deduplicated events, discovery journeys, active weeks and activation-to-retention association.
+- Retention analysis fixes activation at day 14 before week four. Raw and craft/experience-standardised gaps are reported with common-support coverage, never as causal effects.
+- Original independent synthetic effect/null experiment retains its primary/abandonment outputs and fixed rules.
+- New designer-attention extension has neutral/stress assumptions, a fictional pre-period top-designer group, and account-cluster bootstrap intervals. It is a later sensitivity, not retroactive original pre-registration or evidence of network effects.
+- Product-decision page adds a proposed research target, assumption-based impact sizing and explicit criteria. It does not claim an empirical segment treatment effect or recommend real rollout from simulated results.
 
 ## Validation
 
-- 28 Python tests pass, including known-journey metric fixtures.
-- New product dbt: three models, 17 data tests, no errors/warnings. Existing catalogue dbt: six models, 23 tests, no errors; one missingness-warning test flags two fields.
-- Fresh reproduction without credentials or real data: make app-data test succeeds; exported synthetic app JSON matches byte-for-byte; 27 slice funnels reconcile.
-- Browser interactions verified across all sections, including filters, missing maturity, retention cells, null experiment, catalogue segmentation, SQL selector and downloaded CSV. Desktop and mobile layouts inspected; no document overflow at 390 pixels.
-- Portable payloads reconcile, but direct file-protocol navigation is blocked by the in-app browser policy, so direct-file browser QA is not claimed.
+- 36 Python tests pass, including hand-constructed retention, exposure, clustering, orphan/window, reproducibility and sizing checks.
+- Product dbt: four models and 23 tests pass. Original catalogue build: six models, 23 tests, no errors; its one missingness-warning test remains documented.
+- Browser checks confirm activation-retention values, stress-triggered hold, impact controls and divider rendering. Fresh source-only full rebuild passes without credentials or real catalogue data. The app export, attention intervals and original experiment results match the main checkout; all 27 retention group totals reconcile. Final source-control checks exclude private data.
 
-## Data handling
+## Data and repository
 
-User authorised personal/private analysis and the private repo. Credentials came from a replacement/new app and remain in ignored .env. Real records, databases, real app payload and derived portable HTML are local and ignored; the repository includes code, documentation, a synthetic-only screenshot and labelled synthetic aggregates. No extra API collection occurred during the app revision. The agreement constraints and future publication questions remain in docs/data_feasibility.md. Include derived app copies in retention/deletion reviews.
+Private repository: https://github.com/stephanieboyle/ravelry-discovery-portfolio
 
-## Repository
+Credentials, local databases, generated event/impression CSVs, real catalogue payloads and real-data portable HTML remain ignored. Only source, documentation, labelled synthetic aggregates and synthetic-only screenshots are tracked. No new real API requests were made for these extensions. The supplied API agreement's constraints remain recorded; private use does not confer publication permission. Include derived app copies in retention/deletion reviews.
 
-https://github.com/stephanieboyle/ravelry-discovery-portfolio — private. The revision includes the app, rewritten README, synthetic export and supporting models/tests. Secret/data scans passed; real derived payloads and credentials are excluded.
+## Next evidence outside this portfolio demonstration
 
-## Next product evidence
-
-Review the real discovery flow, observe makers choosing projects, speak to designers, validate the recording proxy, and establish actual internal baselines. Simulated craft differences, funnels, retention and experiments do not establish Ravelry behaviour or feature effectiveness. These are proposed research/experiment steps, not missing software implementation.
-
-## Visualisation and naming update
-
-User selected **Count Your Stitches** as the project name. Added a proportional-width funnel chart, weekly new/returning stacked columns, activation-by-craft bars, a saved-versus-direct start-path bar, and week-1/4/8 retention checkpoint bars. Preserved the overview analysis summary. Supporting measures and methodology explanations are collapsed; removed redundant narrative cards and the craft table. No pie charts. All visualisations use the existing aggregates and respond to the existing filters; no new behavioural or causal claims.
-
-## Overview opening
-
-Replaced the generic page title/subtitle with “Finding a pattern is just the start.” and a concise headline summary showing pattern-open and recorded-start shares. The summary recalculates from the selected mature-account cohort and explicitly describes simulated behaviour. The detailed analysis summary remains unchanged.
-
-Removed the sb monogram at the user's request; the top-left identity now displays Stephanie Boyle and Product analytics at all screen sizes. Headline statistics explicitly use accounts with complete follow-up.
+Audit the current discovery flow; observe makers and speak to designers; validate the recording proxy and actual metadata/telemetry; establish real baselines and harm margins; assess shared-market interference before choosing a real experiment. These are research/deployment steps, not invented results.

@@ -18,3 +18,6 @@ Then ran a separate bounded 50-pattern study: pages of five, one bulk details ca
 - Do not interpret sample metrics as catalogue-wide statistics. Future collection should use a defined frame and documented filters/order and report exclusions, duplicates and missingness.
 
 Publication permission remains unresolved; the private repository excludes real data and generated real-data reports. Honour the limited retention/deletion guidance in data/README.md.
+
+
+Publication scope update: Stephanie authorised a public source repository. Only code and synthetic aggregates are published. Real API records and derived outputs remain excluded; permission to publish those remains unresolved.

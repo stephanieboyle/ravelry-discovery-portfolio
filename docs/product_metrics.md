@@ -56,3 +56,11 @@ The overview reports three primary measures: latest complete-week discovery acti
 ## Visualisations
 
 Count Your Stitches uses funnel stage-boundary widths proportional to distinct mature-account counts, with labelled counts and shares of entrants; polygon area is not an additional metric. New/returning columns reconcile to weekly active discovery accounts. Craft bars divide recorded starts by the same mature-account denominators. The start-path bar divides recorded starters into save-before-start and no-prior-save groups. Retention checkpoint bars use complete-window numerators/denominators separately for weeks 1, 4 and 8. Missing horizons remain unobserved. No pie charts are used. The original overview analysis summary remains visible; supporting metric detail is collapsed.
+
+## Activation, attention and product-decision extension
+
+The `mart_activation_retention` model adds a day-14 landmark and a later week-four outcome. The app reports raw starter/non-starter return rates and a craft × experience standardisation with common-support coverage; see [activation_retention.md](activation_retention.md). This is an observational association and cannot establish that starting causes return.
+
+The experiment now also loads a separate, explicitly fictional pre-period/exposure sensitivity on the existing experiment assignments. Its confidence interval resamples account clusters, not independent impressions. The concentration-stress case can put an otherwise positive primary result on hold. The original two-outcome result JSON remains unchanged; the extended review is explicitly separate. See [designer_attention.md](designer_attention.md).
+
+The product-decision page uses a fixed new-to-craft planning cohort, twelve coverage/lift scenarios, and explicit criteria. It is not a traffic forecast, confidence interval or segment treatment estimate; see [product_decision.md](product_decision.md). The overview retains three headline metrics and the existing analysis summary. The decorative stitch row has been replaced by a self-contained knitting-needle divider.
