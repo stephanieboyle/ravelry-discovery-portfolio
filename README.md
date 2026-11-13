@@ -11,6 +11,10 @@ I wanted to work through that question in the way I would in a product team: def
 
 ![The product analytics app, showing simulated discovery and activation metrics](reports/app-overview.jpg)
 
+[Open the live app](https://count-your-stitches.pages.dev) · [Source and analysis](https://github.com/stephanieboyle/ravelry-discovery-portfolio)
+
+The public app uses simulated product data only. Real catalogue records stay local.
+
 ## Have a look around
 
 The app has seven sections:

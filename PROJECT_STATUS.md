@@ -1,6 +1,6 @@
 # Project status
 
-Updated: 13 November 2026. **Count Your Stitches** is a local product metrics app, backed by a source repository and reproducible Python/SQL/dbt analysis.
+Updated: 13 November 2026. **Count Your Stitches** is a publicly hosted product metrics app, backed by a source repository and reproducible Python/SQL/dbt analysis.
 
 ## Product and presentation decisions
 
@@ -37,3 +37,5 @@ Audit the current discovery flow; observe makers and speak to designers; validat
 ## Numerical publication review
 
 Explicit UTC weeks and 336-hour maturity windows remove machine-timezone and daylight-saving ambiguity. Independent source-event reconciliation passes all 27 slices and 2,268 retention cells; see docs/validation.md and reports/synthetic/numerical_audit.json. Public hosting contains only simulated aggregates.
+
+Live app: https://count-your-stitches.pages.dev — free static Cloudflare Pages hosting, with an explicit public-file allowlist and no private catalogue payload. See docs/hosting.md for updates.
