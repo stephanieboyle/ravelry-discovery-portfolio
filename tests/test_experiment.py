@@ -62,3 +62,9 @@ def test_planning_reasonable_scale():
     v=planning()
     assert 10000<v['required_total']<25000
     assert .01<v['mde_at_10800_per_arm']<.02
+
+
+def test_power_uses_expected_population_baseline():
+    v=planning()
+    assert v['assumed_baseline']==pytest.approx(.12+.03*.45-.01*.30)
+    assert v['reference_group_baseline']==pytest.approx(.12)

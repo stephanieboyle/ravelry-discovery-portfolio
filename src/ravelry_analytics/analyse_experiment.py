@@ -8,6 +8,7 @@ import pandas as pd
 from scipy.stats import chisquare
 from statsmodels.stats.proportion import confint_proportions_2indep, proportions_ztest, proportion_effectsize
 from statsmodels.stats.power import NormalIndPower
+from .simulate_experiment import ASSUMPTIONS
 import os
 os.environ.setdefault("MPLCONFIGDIR", str(Path(".cache/matplotlib").resolve()))
 import matplotlib
@@ -96,12 +97,16 @@ def null_calibration(repetitions=500):
 
 def planning():
     power=NormalIndPower()
-    effect=proportion_effectsize(.135,.12)
+    baseline=(ASSUMPTIONS['baseline']
+        + ASSUMPTIONS['experienced_increment']*ASSUMPTIONS['experience_probability']
+        + ASSUMPTIONS['crochet_increment']*(1-ASSUMPTIONS['knitting_probability']))
+    lift=ASSUMPTIONS['treatment_effect']
+    effect=proportion_effectsize(baseline+lift,baseline)
     n=math.ceil(power.solve_power(effect_size=effect,alpha=.05,power=.8,ratio=1,alternative="two-sided"))
     target_effect=power.solve_power(nobs1=10800,alpha=.05,power=.8,ratio=1,alternative="two-sided")
     from scipy.optimize import brentq
-    mde=brentq(lambda d:proportion_effectsize(.12+d,.12)-target_effect,1e-8,.5)
-    return {"assumed_baseline":.12,"assumed_absolute_effect":.015,"alpha":.05,"power":.8,
+    mde=brentq(lambda d:proportion_effectsize(baseline+d,baseline)-target_effect,1e-8,.5)
+    return {"assumed_baseline":baseline,"reference_group_baseline":ASSUMPTIONS["baseline"],"assumed_absolute_effect":lift,"alpha":.05,"power":.8,
          "required_per_arm":n,"required_total":2*n,"mde_at_10800_per_arm":mde,
          "method":"Two-sided normal approximation, Cohen h; no attrition/inference across repeated looks"}
 
@@ -134,7 +139,7 @@ def main():
           f"Abandonment difference: {g['difference']*100:.2f} points (95% CI {g['ci_low']*100:.2f} to {g['ci_high']*100:.2f}); harm margin +1 point.",
           f"Decision: **{x['decision']}**. This concerns illustrative criteria, not a launch decision for Ravelry.", '']
     pl=results['planning'];cal=results['null_calibration']
-    lines += [f"Planning: assumed 12% baseline, +1.5-point effect, 80% power and two-sided 5% alpha require {pl['required_total']:,} total accounts. Approximate MDE at 10,800 per arm: {pl['mde_at_10800_per_arm']*100:.2f} points.", '',
+    lines += [f"Planning: assumed {pl['assumed_baseline']:.2%} marginal baseline, +1.5-point effect, 80% power and two-sided 5% alpha require {pl['required_total']:,} total accounts. Approximate MDE at 10,800 per arm: {pl['mde_at_10800_per_arm']*100:.2f} points.", '',
       f"Null calibration: {cal['repetitions']} fixed-seed independent A/A repetitions; rejection fraction {cal['false_positive_fraction']:.1%}, CI coverage {cal['ci_coverage']:.1%}, Monte Carlo SE at nominal 5% = {cal['mc_standard_error_at_nominal']:.3f}. A single null run may be significant by chance.", '',
       'All values derive from results.json. Binary outcomes are cross-checked against events; absence of missing telemetry is an assumption of the generator, not evidence about real instrumentation.']
     (out/'summary.md').write_text('\n'.join(lines)+'\n')

@@ -7,7 +7,7 @@ import pandas as pd
 
 SEED = 20261026
 ASSUMPTIONS = {"seed": SEED, "candidates": 24000, "eligibility_probability": .9,
-    "allocation": .5, "baseline": .12, "experienced_increment": .03,
+    "allocation": .5, "experience_probability": .45, "knitting_probability": .7, "baseline": .12, "experienced_increment": .03,
     "crochet_increment": -.01, "treatment_effect": .015,
     "abandonment_baseline": .28, "abandonment_treatment_effect": -.005,
     "practical_lift": .01, "abandonment_harm_margin": .01,
@@ -19,8 +19,8 @@ def generate(scenario="assumed_effect", seed=SEED, candidates=24000):
     n = candidates
     eligible = rng.random(n) < .9
     variant = np.where(eligible, np.where(rng.random(n)<.5, "treatment", "control"), "")
-    experienced = rng.random(n)<.45
-    craft = np.where(rng.random(n)<.7, "knitting", "crochet")
+    experienced = rng.random(n)<ASSUMPTIONS["experience_probability"]
+    craft = np.where(rng.random(n)<ASSUMPTIONS["knitting_probability"], "knitting", "crochet")
     assigned = pd.Series(pd.Timestamp("2026-09-01",tz="UTC") + pd.to_timedelta(rng.integers(0,14*86400,n),unit="s"))
     assigned.loc[~eligible] = pd.NaT
     delta = .015 if scenario == "assumed_effect" else 0.
