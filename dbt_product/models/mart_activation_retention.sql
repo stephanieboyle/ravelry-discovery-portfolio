@@ -5,7 +5,7 @@ with week_four as (
 ), eligibility as (
     select *, mature_14d
       and cohort_week + interval '5 weeks' <= date '2026-10-26'
-      and first_discovery_at + interval '14 days' <= cohort_week + interval '4 weeks'
+      and first_discovery_at + interval '336 hours' <= cohort_week + interval '4 weeks'
       as eligible_week4
     from {{ ref('dim_discovery_users') }}
 )

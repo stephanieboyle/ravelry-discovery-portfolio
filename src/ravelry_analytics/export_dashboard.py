@@ -90,7 +90,7 @@ def make_slice(con, craft='All crafts', experience='All experience', window='all
         count(*) filter (where w.weeks_since_discovery = 0) as new
         from fct_discovery_weeks w join selected_users u using (user_id)
         group by 1 order by 1''').fetchall()
-    recorded = dict(con.execute('''select date_trunc('week', e.occurred_at)::date, count(distinct e.user_id)
+    recorded = dict(con.execute('''select date_trunc('week', timezone('UTC', e.occurred_at))::date, count(distinct e.user_id)
         from fct_product_events e join selected_users u using (user_id)
         where e.event_name = 'project_started' group by 1''').fetchall())
     series = [{'week': str(w), 'active': int(a), 'new': int(n),
@@ -144,6 +144,7 @@ def main():
     args = parser.parse_args()
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect(args.db, read_only=False)
+    con.execute("set TimeZone='UTC'")
     meta = json.loads(con.execute('select assumptions from demo_metadata').fetchone()[0])
     counts = con.execute('select (select count(*) from synthetic_events), (select count(*) from fct_product_events)').fetchone()
     meta['received_events'], meta['unique_events'] = counts

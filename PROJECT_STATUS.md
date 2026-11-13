@@ -1,6 +1,6 @@
 # Project status
 
-Updated: 12 November 2026. **Count Your Stitches** is a local product metrics app, backed by a source repository and reproducible Python/SQL/dbt analysis.
+Updated: 13 November 2026. **Count Your Stitches** is a publicly hosted product metrics app, backed by a source repository and reproducible Python/SQL/dbt analysis.
 
 ## Product and presentation decisions
 
@@ -20,16 +20,22 @@ Updated: 12 November 2026. **Count Your Stitches** is a local product metrics ap
 
 ## Validation
 
-- 36 Python tests pass, including hand-constructed retention, exposure, clustering, orphan/window, reproducibility and sizing checks.
+- 38 Python tests pass, including hand-constructed retention, exposure, clustering, orphan/window, reproducibility and sizing checks.
 - Product dbt: four models and 23 tests pass. Original catalogue build: six models, 23 tests, no errors; its one missingness-warning test remains documented.
 - Browser checks confirm activation-retention values, stress-triggered hold, impact controls and divider rendering. Fresh source-only full rebuild passes without credentials or real catalogue data. The app export, attention intervals and original experiment results match the main checkout; all 27 retention group totals reconcile. Final source-control checks exclude private data.
 
 ## Data and repository
 
-Private repository: https://github.com/stephanieboyle/ravelry-discovery-portfolio
+Public repository: https://github.com/stephanieboyle/ravelry-discovery-portfolio
 
 Credentials, local databases, generated event/impression CSVs, real catalogue payloads and real-data portable HTML remain ignored. Only source, documentation, labelled synthetic aggregates and synthetic-only screenshots are tracked. No new real API requests were made for these extensions. The supplied API agreement's constraints remain recorded; private use does not confer publication permission. Include derived app copies in retention/deletion reviews.
 
 ## Next evidence outside this portfolio demonstration
 
 Audit the current discovery flow; observe makers and speak to designers; validate the recording proxy and actual metadata/telemetry; establish real baselines and harm margins; assess shared-market interference before choosing a real experiment. These are research/deployment steps, not invented results.
+
+## Numerical publication review
+
+Explicit UTC weeks and 336-hour maturity windows remove machine-timezone and daylight-saving ambiguity. Independent source-event reconciliation passes all 27 slices and 2,268 retention cells; see docs/validation.md and reports/synthetic/numerical_audit.json. Public hosting contains only simulated aggregates.
+
+Live app: https://count-your-stitches.pages.dev — free static Cloudflare Pages hosting, with an explicit public-file allowlist and no private catalogue payload. See docs/hosting.md for updates.
