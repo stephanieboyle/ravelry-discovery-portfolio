@@ -18,7 +18,7 @@ A clean source-only reproduction uses requirements.lock, editable package instal
 
 ## Repository checks
 
-Before commit: verify .env, local databases, data/synthetic event files, caches, dbt targets/logs and reports/private are ignored. Compare every staged file against locally configured secret values without printing them. Search staged text for credential formats and absolute editable-install paths. Only code, docs, placeholder configuration, tests and labelled synthetic aggregate outputs belong in the remote. Verify GitHub repository visibility remains private after creation.
+Before commit: verify .env, local databases, data/synthetic event files, caches, dbt targets/logs and reports/private are ignored. Compare every staged file against locally configured secret values without printing them. Search staged text for credential formats and absolute editable-install paths. Only code, docs, placeholder configuration, tests and labelled synthetic aggregate outputs belong in the remote. Verify that public files contain only source and labelled synthetic aggregates.
 
 These checks do not establish real-world telemetry correctness, API availability under all conditions, randomisation integrity on a deployed product, or legal permission to publish API-derived output. Existing UI audit, user research and real experiment remain proposed next work.
 
@@ -40,3 +40,11 @@ Current Python suite: 36 passing tests. Product dbt now has four models and 23 p
 Browser verification confirms that the stress assumption puts the extended review on hold while leaving the original primary result unchanged, and impact controls reconcile to eligible accounts × coverage × lift. No simulated result is represented as empirical Ravelry evidence. The extended guardrail protocol was fixed before its own generated output and is explicitly distinguished from the original primary protocol.
 
 Fresh source-only rebuild of the complete extension also passes: four product models, 23 data tests and 36 Python tests. Synthetic app/attention/original-experiment JSON matches the main checkout; all 27 activation-group numerator/denominator totals reconcile to the corresponding week-four cohort metrics. Browser checks include the absent-follow-up case, which stays unobserved rather than reporting a zero effect.
+
+## Public hosting review — 13 November 2026
+
+38 Python tests and all 23 product dbt data tests pass. An independent pandas audit reconciles all 27 dashboard slices, 2,268 retention cells and 12 sizing scenarios directly to the synthetic source records (62,040 received events; 61,426 unique events; 12,000 fictional accounts). See reports/synthetic/numerical_audit.json.
+
+The review found machine-timezone-dependent weekly boundaries and a daylight-saving boundary in the maturity window. Weeks now use UTC explicitly; fourteen days means 336 elapsed hours. The corrected overall mature denominator is 8,951, with 1,493 recorded starts (16.7%). Week-four retention is 2,020 / 7,698 (26.2%). Regression fixtures exercise Sunday UTC and the autumn clock change. These remain simulated results.
+
+Public packaging uses an explicit six-file allowlist. The private catalogue payload, credentials, databases and real-data reports are excluded. Public hosts never request the local catalogue payload.

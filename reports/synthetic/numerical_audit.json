@@ -1,0 +1,23 @@
+{
+  "evidence_class": "SYNTHETIC product events only",
+  "method": "Independent pandas event deduplication, ordered journeys, elapsed 14-day windows and UTC calendar cohorts; no model tables read",
+  "received_events": 62040,
+  "unique_events": 61426,
+  "slices_checked": 27,
+  "retention_cells_checked": 2268,
+  "all_summary": {
+    "entrants": 10263,
+    "mature": 8951,
+    "opened": 7667,
+    "saved": 2775,
+    "started": 1493,
+    "saved_then_started": 674,
+    "median_days": 7.4200632228356485,
+    "activation_rate": 0.16679700592112612,
+    "immature": 1312,
+    "retention4": 0.26240581969342686,
+    "retention4_n": 2020,
+    "retention4_eligible": 7698
+  },
+  "opportunity_scenarios_checked": 12
+}

@@ -112,3 +112,31 @@ def test_activation_precedes_retention_and_unknowns_stay_unknown(modelled):
     recent=make_slice(modelled,window='4')['activation_retention']
     assert recent['eligible_accounts']==0 and recent['crude_gap'] is None
     assert recent['standardised_gap'] is None
+
+
+def test_utc_week_boundaries_do_not_depend_on_machine_timezone():
+    con = duckdb.connect()
+    con.execute("set TimeZone='Europe/London'")
+    users = pd.DataFrame({'user_id': [1, 2],
+        'signed_up_at': pd.to_datetime(['2026-09-06T23:00:00Z', '2026-10-12T00:00:00Z'], utc=True),
+        'craft': ['Knitting', 'Knitting'], 'experience': ['New to craft', 'New to craft']})
+    stamp = pd.Timestamp('2026-09-06T23:30:00Z')  # Sunday UTC; Monday in London.
+    events = pd.DataFrame([{'event_id': 'sunday', 'user_id': 1, 'event_name': 'discovery_viewed',
+        'occurred_at': stamp, 'received_at': stamp + pd.Timedelta(seconds=5),
+        'session_id': 's1', 'pattern_id': 100, 'schema_version': 1},
+        {'event_id': 'dst-boundary', 'user_id': 2, 'event_name': 'discovery_viewed',
+        'occurred_at': pd.Timestamp('2026-10-12T00:00:00Z'),
+        'received_at': pd.Timestamp('2026-10-12T00:00:05Z'),
+        'session_id': 's2', 'pattern_id': 100, 'schema_version': 1}])
+    con.register('input_users', users); con.register('input_events', events)
+    con.execute('create table synthetic_users as select * from input_users')
+    con.execute('create table synthetic_events as select * from input_events')
+    for name in ['fct_product_events', 'dim_discovery_users', 'fct_discovery_weeks']:
+        sql = (ROOT / 'dbt_product/models' / f'{name}.sql').read_text()
+        sql = re.sub(r"\{\{ source\('demo', '([^']+)'\) \}\}", r'\1', sql)
+        sql = re.sub(r"\{\{ ref\('([^']+)'\) \}\}", r'\1', sql)
+        con.execute(f'create table {name} as {sql}')
+    assert str(con.execute('select cohort_week from dim_discovery_users where user_id=1').fetchone()[0]) == '2026-08-31'
+    assert str(con.execute('select activity_week from fct_discovery_weeks where user_id=1').fetchone()[0]) == '2026-08-31'
+    assert con.execute('select mature_14d from dim_discovery_users where user_id=2').fetchone()[0] is True
+    con.close()

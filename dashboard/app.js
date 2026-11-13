@@ -296,7 +296,7 @@ async function start() {
     }
     // This optional payload is ignored by Git and available only in the local private preview.
     if (window.PRODUCT_CATALOGUE_DATA) CATALOGUE = window.PRODUCT_CATALOGUE_DATA;
-    else if (!window.PRODUCT_DEMO_DATA) {
+    else if (!window.PRODUCT_DEMO_DATA && ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname)) {
       try { const r = await fetch('catalogue.private.json'); if (r.ok) CATALOGUE = await r.json(); } catch (_) { /* Standalone synthetic demo remains fully usable. */ }
     }
     for (const id of ['craft', 'experience', 'window']) $(`#${id}`).addEventListener('change', render);

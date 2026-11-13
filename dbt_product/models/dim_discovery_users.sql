@@ -20,12 +20,12 @@ with first_discovery as (
     group by d.user_id
 )
 select u.*, d.first_discovery_at,
-    date_trunc('week', d.first_discovery_at)::date as cohort_week,
+    date_trunc('week', timezone('UTC', d.first_discovery_at))::date as cohort_week,
     o.first_open_at, x.first_save_at, x.first_start_at,
-    d.first_discovery_at + interval '14 days' <= timestamptz '2026-10-26 00:00:00+00' as mature_14d,
-    coalesce(o.first_open_at < d.first_discovery_at + interval '14 days', false) as opened_14d,
-    coalesce(x.first_save_at < d.first_discovery_at + interval '14 days', false) as saved_14d,
-    coalesce(x.first_start_at < d.first_discovery_at + interval '14 days', false) as started_14d,
+    d.first_discovery_at + interval '336 hours' <= timestamptz '2026-10-26 00:00:00+00' as mature_14d,
+    coalesce(o.first_open_at < d.first_discovery_at + interval '336 hours', false) as opened_14d,
+    coalesce(x.first_save_at < d.first_discovery_at + interval '336 hours', false) as saved_14d,
+    coalesce(x.first_start_at < d.first_discovery_at + interval '336 hours', false) as started_14d,
     case when x.first_start_at is not null then
         epoch(x.first_start_at - d.first_discovery_at) / 86400.0 end as days_to_start
 from {{ source('demo', 'synthetic_users') }} u
