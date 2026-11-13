@@ -12,6 +12,8 @@ The tracked synthetic summaries/charts are explicitly labelled. No real-data agg
 
 ## Product metrics app
 
-The new behavioural demonstration uses a separate `product_demo.duckdb` with fictional accounts/events, seed 20261112. `dbt_product` models its event identities, journeys and calendar-week activity. `dashboard/data.json` contains only synthetic aggregate slices, simulation metadata, SQL and the separate synthetic experiment output; it is safe to include in the private source repository.
+The new behavioural demonstration uses a separate `product_demo.duckdb` with fictional accounts/events, seed 20261112. `dbt_product` models its event identities, journeys and calendar-week activity. `dashboard/data.json` contains only synthetic aggregate slices, simulation metadata, SQL and the separate synthetic experiment output; it is safe to include in the public source repository.
 
 `dashboard/catalogue.private.json` contains API-derived catalogue attributes with source IDs removed/replaced by within-sample aliases. It is ignored by Git. The generated `reports/private/product-metrics.html` is a portable local app; when a real snapshot is available, it embeds that catalogue section too and must remain private and untracked. Include both files, screenshots showing real data, and any copied portable HTML in real-data removal/retention reviews. Removing the database alone does not remove these derived copies.
+
+The attention extension writes a separately fictional pre-period designer frame and neutral/stress impression CSVs under data/synthetic. These share the experiment's fictional assignment IDs, never real catalogue IDs. Only aggregate results are tracked. Product decision scenarios contain no new personal data and use the existing fictional planning cohort.

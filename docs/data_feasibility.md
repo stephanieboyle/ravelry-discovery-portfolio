@@ -40,3 +40,6 @@ Local provenance records a seven-day retention-review date as a project choice, 
 ## Recommended scope and limits
 
 The implemented four questions describe sample activity concentration, publication-age/craft context, evidence-count coverage and whether qualitative opportunity review is justified. It is a convenience text-search sample with unspecified ordering, potential moving-pagination bias and no inclusion probabilities. It cannot estimate catalogue-wide distributions, visibility, conversion, confidence, actual making, experimental effects or network effects. Low activity is not low exposure. Project/favourite ratios are not conversion rates. The documented fields support catalogue diagnostics, not an objective achievable-pattern score. See methodology.md and the local reports/private/findings.md for analysis and limitations.
+
+
+Publication scope update: Stephanie authorised a public source repository. Only code and synthetic aggregates are published. Real API records and derived outputs remain excluded; permission to publish those remains unresolved.

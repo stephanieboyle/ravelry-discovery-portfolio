@@ -31,3 +31,11 @@ The domains also differ. A pattern is reusable by many makers; a person's time, 
 ## If challenged on the decision
 
 Why not build a recommender? Because metadata and count uncertainty do not establish the need or supply exposure labels. Why not call it success after the synthetic lift? Because the effect is an input assumption and random variation, not an empirical finding. What would change my recommendation? Current-flow evidence that uncertainty is already resolved, poor comprehension of the summary, inadequate metadata or a real experiment with inconclusive benefit or material ecosystem harm.
+
+## The additional analyses I would discuss
+
+I compared week-four return by activation status using a day-14 landmark, then standardised craft and experience to a common mix. Fixing the ordering avoids letting the return window define the activation group. It still does not make the gap causal: intent is unobserved and the grouping is behavioural.
+
+For designer attention I added an explicitly synthetic exposure model, using the existing assignment unit for bootstrap resampling. The stress case can block the numerical review despite a positive primary result. I would distinguish this later sensitivity from the original primary/abandonment protocol, and would not claim it proves interference or network effects.
+
+The opportunity view uses eligible accounts × assumed coverage × absolute lift. Its range is a planning scenario, not an empirical forecast or a confidence interval. Targeting new-to-craft makers is a proposed research focus rather than a claim that the feature has a measured segment-specific effect.

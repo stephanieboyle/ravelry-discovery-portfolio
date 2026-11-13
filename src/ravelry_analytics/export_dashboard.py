@@ -11,6 +11,41 @@ AS_OF = pd.Timestamp('2026-10-26')
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def activation_retention(con):
+    rows = con.execute("""select a.activated_14d, count(*) as n, count_if(a.returned_week4) as returned
+        from mart_activation_retention a join selected_users u using (user_id)
+        where a.eligible_week4 group by 1""").fetchall()
+    grouped = {bool(active): (int(n), int(returned or 0)) for active,n,returned in rows}
+    groups=[]
+    for active,label in [(True,'Started within 14 days'),(False,'No start within 14 days')]:
+        n,returned=grouped.get(active,(0,0))
+        groups.append({'activated':active,'label':label,'denominator':n,'numerator':returned,
+                       'rate':returned/n if n else None})
+    strata_rows=con.execute("""select a.craft,a.experience,a.activated_14d,count(*) as n,
+        count_if(a.returned_week4) as returned
+        from mart_activation_retention a join selected_users u using (user_id)
+        where a.eligible_week4 group by 1,2,3 order by 1,2,3""").fetchall()
+    strata={}
+    for craft,experience,active,n,returned in strata_rows:
+        strata.setdefault((craft,experience),{})[bool(active)]=(int(n),int(returned or 0))
+    common=[(key,value) for key,value in strata.items() if all(flag in value for flag in [True,False])]
+    covered=sum(sum(n for n,_ in values.values()) for _,values in common)
+    rates={True:0.,False:0.}
+    if covered:
+        for _,values in common:
+            weight=sum(n for n,_ in values.values())/covered
+            for active in [True,False]:
+                n,returned=values[active];rates[active]+=weight*returned/n
+    total=sum(g['denominator'] for g in groups)
+    crude=groups[0]['rate']-groups[1]['rate'] if all(g['rate'] is not None for g in groups) else None
+    return {'groups':groups,'crude_gap':crude,
+            'standardised_gap':rates[True]-rates[False] if covered else None,
+            'standardised_rates':{'started':rates[True] if covered else None,'not_started':rates[False] if covered else None},
+            'common_support_accounts':covered,'eligible_accounts':total,
+            'coverage':covered/total if total else None,'common_strata':len(common),'all_strata':len(strata),
+            'method':'Direct standardisation to pooled craft × experience weights in strata containing both activation groups. Day-14 landmark precedes week 4. Association only; latent intent remains unobserved.'}
+
+
 def make_slice(con, craft='All crafts', experience='All experience', window='all'):
     clauses, params = [], []
     if craft != 'All crafts':
@@ -64,8 +99,19 @@ def make_slice(con, craft='All crafts', experience='All experience', window='all
         count_if(mature_14d and started_14d) as starts
         from selected_users group by 1 order by 1''').fetchall()
     return {'summary': summary, 'weekly': series, 'cohorts': heatmap,
+            'activation_retention': activation_retention(con),
             'craft_segments': [{'craft': c, 'entrants': int(n), 'mature': int(m or 0),
                                 'starts': int(s or 0)} for c, n, m, s in segments]}
+
+
+def decision_scenarios(slices):
+    target = slices['All crafts|New to craft|all']['summary']
+    return {'synthetic':True,'target':'New-to-craft discovery accounts',
+            'eligible_accounts':target['mature'],'baseline_rate':target['activation_rate'],
+            'scenarios':[{'coverage':coverage,'absolute_lift':lift,
+                          'additional_recorded_starts':target['mature']*coverage*lift}
+                         for coverage in [.5,.75,1.] for lift in [.005,.01,.015,.02]],
+            'note':'Assumption-based sensitivity, not a forecast or confidence interval. Fixed cohort size is from the synthetic demo, not expected future traffic.'}
 
 
 def export_catalogue(path, out):
@@ -108,9 +154,10 @@ def main():
                 slices[f'{craft}|{experience}|{window}'] = make_slice(con, craft, experience, window)
     con.close()
     experiment = json.loads(Path('reports/synthetic/results.json').read_text())
-    payload = {'meta': meta, 'slices': slices, 'experiment': experiment,
+    attention = json.loads(Path('reports/synthetic/attention_results.json').read_text())
+    payload = {'meta': meta, 'slices': slices, 'experiment': experiment, 'attention': attention, 'decision': decision_scenarios(slices),
                'sql': {name: (ROOT / 'dbt_product/models' / name).read_text()
-                       for name in ['fct_product_events.sql', 'dim_discovery_users.sql', 'fct_discovery_weeks.sql']}}
+                       for name in ['fct_product_events.sql', 'dim_discovery_users.sql', 'fct_discovery_weeks.sql', 'mart_activation_retention.sql']}}
     (out / 'data.json').write_text(json.dumps(payload, separators=(',', ':'), allow_nan=False))
     has_real = export_catalogue(Path('data/ravelry.duckdb'), out)
     # The portable deliverable is local-only and can be opened without a server.
@@ -121,8 +168,9 @@ def main():
     boot += 'window.PRODUCT_CATALOGUE_DATA=' + json.dumps(real_payload, allow_nan=False).replace('<', '\\u003c') + ';'
     html = (out / 'index.html').read_text()
     css = (out / 'styles.css').read_text()
-    if (out / 'stitches.svg').exists():
-        css = css.replace("url('stitches.svg')", 'url("data:image/svg+xml,' + quote((out / 'stitches.svg').read_text(), safe='') + '")')
+    for asset in ['stitches.svg', 'needle.svg']:
+        if (out / asset).exists():
+            css = css.replace(f"url('{asset}')", 'url("data:image/svg+xml,' + quote((out / asset).read_text(), safe='') + '")')
     html = html.replace('<link rel="stylesheet" href="styles.css">', '<style>' + css + '</style>')
     html = html.replace('<script src="app.js" defer></script>', '<script>' + boot + '</script><script>' + (out / 'app.js').read_text() + '</script>')
     standalone.write_text(html)

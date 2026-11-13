@@ -114,13 +114,14 @@
     "interpretation": "Simulation only; no evidence of Ravelry feature effectiveness."
   },
   "planning": {
-    "assumed_baseline": 0.12,
+    "assumed_baseline": 0.1305,
+    "reference_group_baseline": 0.12,
     "assumed_absolute_effect": 0.015,
     "alpha": 0.05,
     "power": 0.8,
-    "required_per_arm": 7756,
-    "required_total": 15512,
-    "mde_at_10800_per_arm": 0.012662188746139728,
+    "required_per_arm": 8294,
+    "required_total": 16588,
+    "mde_at_10800_per_arm": 0.013107796502347507,
     "method": "Two-sided normal approximation, Cohen h; no attrition/inference across repeated looks"
   },
   "null_calibration": {
